@@ -16,7 +16,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/jobs", (req, res) => {
-  res.render("pages/all-jobs-result");
+  res.render("pages/jobs/all-jobs-result");
+});
+
+app.get("/jobs/:id", (req, res) => {
+  res.render("pages/jobs/job-details");
 });
 
 app.listen(port, console.log(`Server running on port ${port}`));
