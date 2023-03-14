@@ -8,6 +8,7 @@
   --white-color: #fff;
   --button-hover: #2557a7;
   --footer-color: #f7f8fb;
+  --job-description-color: #5a6881;
 }
 
 * {
@@ -214,8 +215,7 @@ a {
 .footer {
   width: 100%;
   background-color: var(--footer-color);
-  min-height: 40vh;
-  margin: 100px 0 0 0;
+  min-height: 30vh;
 }
 
 .footer ul {
@@ -223,7 +223,7 @@ a {
   list-style: none;
   align-items: center;
   justify-content: center;
-  padding-top: 50px;
+  padding-top: 40px;
 }
 
 .footer ul li {
@@ -294,5 +294,70 @@ a {
   }
   .footer ul li {
     margin: 5px 0;
+  }
+}
+
+/* all jobs result page */
+
+.all-jobs {
+  max-width: 650px;
+  margin: 50px auto;
+}
+
+.box {
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px 0;
+}
+
+.job-title a:hover {
+  text-decoration: underline;
+}
+
+.company-name span {
+  font-size: 18px;
+}
+
+.company-location {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.job-type {
+  display: inline-block;
+  background-color: var(--border-color);
+  padding: 4px 8px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.job-type span {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.job-type img {
+  margin-right: 5px;
+}
+
+.job-description {
+  margin: 20px 0;
+}
+
+.job-description ul {
+  list-style: none;
+}
+
+.job-description ul li {
+  color: var(--job-description-color);
+}
+
+@media (min-width: 320px) and (max-width: 535px) {
+  .job-description ul li {
+    font-size: 14px;
+    margin-top: 5px;
   }
 }

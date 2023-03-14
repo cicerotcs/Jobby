@@ -15,4 +15,8 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/jobs", (req, res) => {
+  res.render("pages/all-jobs-result");
+});
+
 app.listen(port, console.log(`Server running on port ${port}`));
