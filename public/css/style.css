@@ -65,10 +65,6 @@ a {
   font-style: italic;
 }
 
-.navbar-auth-links {
-  flex: 1;
-}
-
 .navbar-auth-links a {
   margin: 0 40px;
 }
@@ -95,6 +91,22 @@ a {
 }
 
 .navbar-links a:hover {
+  border-bottom: 2px solid var(--links-color);
+  padding-bottom: 25px;
+}
+
+.navbar-collapsed {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.navbar-collapsed-links a {
+  font-weight: 400;
+  color: var(--text-color);
+  margin: 0 15px;
+}
+
+.navbar-collapsed-links a:hover {
   border-bottom: 2px solid var(--links-color);
   padding-bottom: 25px;
 }
@@ -130,6 +142,27 @@ a {
 
 .hero-auth div a:hover {
   border-bottom: 1px solid var(--links-color);
+}
+
+.hero-auth-collapsed {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.hero-auth-collapsed p {
+  margin-top: 30px;
+}
+
+.hero-auth-collapsed a {
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid var(--primary-color);
+  margin: 0 10px;
+}
+
+.hero-auth-collapsed .signin {
+  background-color: var(--primary-color);
+  color: var(--white-color);
 }
 
 /* search bar */
@@ -199,4 +232,67 @@ a {
 
 .footer ul li a:hover {
   border-bottom: 1px solid var(--links-color);
+}
+
+@media screen and (max-width: 856px) {
+  .searchbar {
+    min-width: 44%;
+  }
+
+  .searchbar form {
+    flex-direction: column;
+  }
+
+  .searchbar .input-container {
+    margin: 3px 0;
+    width: 100%;
+  }
+
+  .searchbar button {
+    width: 100%;
+    margin-top: 15px;
+  }
+}
+
+@media screen and (max-width: 1010px) {
+  .navbar .navbar-links {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1010px) {
+  .navbar-collapsed-links {
+    display: none;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 535px) {
+  .navbar-auth-links a {
+    margin: 0px 10px;
+  }
+  .navbar-logo {
+    flex: 1;
+    margin-left: 0;
+  }
+  .hero-auth {
+    display: none;
+  }
+  .navbar-collapsed-links a {
+    margin: 0 11px;
+  }
+}
+
+@media screen and (min-width: 535px) {
+  .hero-auth-collapsed {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 685px) {
+  .footer ul {
+    flex-direction: column;
+  }
+  .footer ul li {
+    margin: 5px 0;
+  }
 }
