@@ -4,10 +4,43 @@
     <a href="#">Are you an employer?</a>
   </div>
 
-  <form action="/candidates/signup" method="POST">
+  <form name="signup">
     <input type="text" name="name" placeholder="Full name" />
     <input type="text" name="email" placeholder="Email" />
-    <input type="text" name="password" placeholder="Password" />
+    <input type="password" name="password" placeholder="Password" />
     <button type="submit">Register</button>
+    <p class="message"></p>
   </form>
 </div>
+
+<script>
+  const form = document.forms.signup;
+  const { name: userName, email, password } = form.elements;
+  const message = document.querySelector(".message");
+
+  async function handleRegister(event) {
+    event.preventDefault();
+    try {
+      const res = await axios.post("/candidate/signup", {
+        name: userName.value,
+        email: email.value,
+        password: password.value,
+      });
+      if (res.status === 200) {
+        message.textContent = res.data.msg;
+        setTimeout(() => {
+          location.replace("/");
+        }, 3000);
+      } else {
+        message.textContent = res.data.response.msg;
+      }
+    } catch (error) {
+      message.textContent = error.response.data.msg;
+    }
+    setTimeout(() => {
+      message.textContent = "";
+    }, 3000);
+  }
+
+  form.addEventListener("submit", handleRegister);
+</script>

@@ -56,6 +56,23 @@ a {
   font-weight: 600;
 }
 
+.message {
+  margin-top: 20px;
+  font-weight: 400;
+}
+
+.success {
+  color: green;
+}
+
+.warning {
+  color: orange;
+}
+
+.error {
+  color: red;
+}
+
 /* navbar section */
 
 .navbar {
