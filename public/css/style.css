@@ -234,6 +234,9 @@ a {
   width: 100%;
   background-color: var(--footer-color);
   min-height: 30vh;
+  position: fixed;
+  left: 0;
+  bottom: 0;
 }
 
 .footer ul {
@@ -518,5 +521,83 @@ a {
 @media (min-width: 320px) and (max-width: 480px) {
   .employer-page h1 {
     font-size: 2.25rem;
+  }
+}
+
+/* candidate signup */
+
+.candidate-signup {
+  max-width: 650px;
+  margin: 50px auto;
+  background-color: var(--footer-color);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.candidate-signup form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.candidate-signup form input {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-color);
+  background-color: var(--white-color);
+  background-clip: padding-box;
+  border: 1px solid var(--border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.375rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  margin: 4px 0;
+}
+
+.candidate-signup form input:focus {
+  color: var(--text-color);
+  background-color: var(--white-color);
+  border-color: var(--links-color);
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.candidate-signup form button {
+  border: none;
+  outline: 0;
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  padding: 10px;
+  color: var(--white-color);
+  font-size: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.candidate-signup h1 {
+  font-size: 2.75rem;
+  font-weight: 400;
+}
+
+.candidate-signup div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.candidate-signup div a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .candidate-signup div {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

@@ -1,5 +1,8 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
+const client = require("./db/connect");
+
+const candidateSignupRouter = require("./routes/auth/candidates/candidate");
 
 const app = express();
 
@@ -10,6 +13,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const port = process.env.PORT || 5000;
+
+app.use("/candidate", candidateSignupRouter);
 
 app.get("/", (req, res) => {
   res.render("index");
@@ -27,4 +32,13 @@ app.get("/employers", (req, res) => {
   res.render("pages/employers/index");
 });
 
-app.listen(port, console.log(`Server running on port ${port}`));
+async function init() {
+  try {
+    await client.connect();
+    app.listen(port, console.log(`Server running on port ${port}`));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+init();
