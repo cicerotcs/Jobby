@@ -23,4 +23,8 @@ app.get("/jobs/:id", (req, res) => {
   res.render("pages/jobs/job-details");
 });
 
+app.get("/employers", (req, res) => {
+  res.render("pages/employers/index");
+});
+
 app.listen(port, console.log(`Server running on port ${port}`));
