@@ -26,8 +26,11 @@ const sess = {
   resave: false,
   saveUninitialized: true,
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24 * 7, //week
+    maxAge: 3600000, //hour
   },
+  store: new MemoryStore({
+    checkPeriod: 86400000, // prune expired entries every 24h
+  }),
 };
 
 if (app.get("env") === "production") {
@@ -75,7 +78,7 @@ app.get("/jobs/:id", async (req, res) => {
     const dbRes = await client.query(selectJob, [id]);
     const job = dbRes.rows[0];
     let sessionId = null;
-    if (req.session.employerId) {
+    if (req.session && req.session.employerId) {
       sessionId = req.session.employerId;
     }
     res.render("pages/jobs/job-details", { job, sessionId, id });

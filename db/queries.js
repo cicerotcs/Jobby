@@ -27,6 +27,9 @@ const addRole =
 const addEducation =
   "INSERT INTO education (user_id, institution_name, degree, field_of_study, start_date, end_date) VALUES ($1, $2, $3,$4, to_date($5, 'Mon YYYY'), to_date($6, 'Mon YYYY'));";
 
+const insertNewSkill =
+  "insert into skills(user_id, skill_name) values($1, $2);";
+
 const addJob =
   "insert into job_postings(title,description,company,location,salary_range,employer_id) values($1,$2,$3,$4,$5,$6);";
 
@@ -59,4 +62,5 @@ module.exports = {
   editJobQuery,
   deleteJobQuery,
   selectUserNameAndEmail,
+  insertNewSkill,
 };

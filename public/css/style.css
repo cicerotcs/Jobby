@@ -684,8 +684,34 @@ a {
   margin: 5px 5px 0 0;
 }
 
+.recommended-jobs-link {
+  display: flex;
+  margin: 50px 0;
+}
+
+.recommended-jobs-link:hover {
+  text-decoration: underline;
+}
+
 .hidden {
   display: none;
+}
+
+.recommended-jobs {
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.recommended-jobs ul {
+  list-style: none;
+}
+
+.recommended-jobs ul li {
+  margin: 10px 0;
+}
+
+.recommended-jobs ul li a {
+  text-decoration: none;
 }
 
 /* forms */

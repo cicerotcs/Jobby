@@ -1,8 +1,17 @@
 <div class="candidate-dashboard">
+  <div
+    style="display: flex; align-items: center; justify-content: space-between"
+  >
+    <a href="/candidate/profile/recommended-jobs" class="recommended-jobs-link"
+      >Recommended jobs</a
+    >
+    <a href="/logout">Logout</a>
+  </div>
+
   <%- include('../../components/candidate-profile/panel', {user}); %>
   <%-include('../../components/candidate-profile/personal-summary', {summary});
   %> <%-include('../../components/candidate-profile/carrer-history',
   {work_experience}); %>
   <%-include('../../components/candidate-profile/education', {education}); %>
-  <%-include('../../components/candidate-profile/skills'); %>
+  <%-include('../../components/candidate-profile/skills', {skills}); %>
 </div>

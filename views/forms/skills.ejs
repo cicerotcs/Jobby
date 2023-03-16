@@ -2,10 +2,41 @@
   <h2>Add Skills</h2>
   <form name="skills">
     <label for="skill-name">Name</label>
-    <input type="text" name="skill-name" id="skill-name" />
+
+    <input type="text" name="skillName" id="skillName" />
     <div class="skill-form-buttons">
       <button type="submit" class="save-form-skill">Save</button>
       <button class="cancel-form-skill">Cancel</button>
     </div>
+    <span id="skillMessage" style="margin-top: 20px; display: flex"></span>
   </form>
 </div>
+
+<script>
+  const formSkill = document.forms.skills;
+  let skillMessage = document.getElementById("skillMessage");
+  const { skillName } = formSkill.elements;
+
+  async function handleAddSkill(event) {
+    event.preventDefault();
+
+    try {
+      const res = await axios.post("/candidate/profile/skill/new", {
+        skillName: skillName.value,
+      });
+      console.log(res);
+      if (res.status === 200) {
+        skillMessage.textContent = res.data.msg;
+        setTimeout(() => {
+          location.reload();
+        }, 3000);
+      }
+    } catch (error) {
+      skillMessage.textContent = error.response.data.msg;
+    }
+    setTimeout(() => {
+      skillMessage.textContent = "";
+    }, 3000);
+  }
+  formSkill.addEventListener("submit", handleAddSkill);
+</script>

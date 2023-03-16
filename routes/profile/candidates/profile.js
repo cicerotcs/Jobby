@@ -5,6 +5,8 @@ const {
   postCandidateSummary,
   addCandidateRole,
   addCandidateEducation,
+  addCandidateSkill,
+  getRecommendedJobs,
 } = require("../../../controllers/profile/candidate/profile");
 
 const {
@@ -24,5 +26,9 @@ router.get("/profile/role/:id/edit", getEditCandidateForm);
 router.put("/profile/role/:id/edit", editCandidateForm);
 
 router.post("/profile/education/new", addCandidateEducation);
+
+router.post("/profile/skill/new", addCandidateSkill);
+
+router.get("/profile/recommended-jobs", getRecommendedJobs);
 
 module.exports = router;

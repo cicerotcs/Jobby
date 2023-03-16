@@ -1,11 +1,13 @@
 <div class="form-skills hidden"><%- include('../../forms/skills'); %></div>
 <div class="skills">
   <h2>Skills</h2>
-  <div class="skills-details">
-    <span class="skill-name">Javascript</span>
-    <span class="skill-name">Javascript</span>
-    <span class="skill-name">Javascript</span>
-    <span class="skill-name">Javascript</span>
+  <div style="display: flex; flex-wrap: wrap">
+    <% if(skills){ %> <% skills.rows.forEach(skill => { %>
+
+    <div class="skills-details">
+      <span class="skill-name"><%=skill.skill_name%></span>
+    </div>
+    <% }) %> <% } %>
   </div>
   <button class="add-skill">Add skills</button>
 </div>

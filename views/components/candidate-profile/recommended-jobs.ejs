@@ -1,0 +1,12 @@
+<div class="recommended-jobs">
+  <h1>Your recommended jobs:</h1>
+  <% if (jobs && jobs.length > 0) { %>
+  <ul>
+    <% jobs.forEach(job => { %>
+    <li><a href="/jobs/<%= job.id %>"><%= job.title %></a></li>
+    <% }); %>
+  </ul>
+  <% } else { %>
+  <p>No job found</p>
+  <% } %>
+</div>

@@ -9,6 +9,7 @@ const {
   addRole,
   addEducation,
   selectUserNameAndEmail,
+  insertNewSkill,
 } = require("../../../db/queries");
 
 const getCandidateProfilePage = async (req, res) => {
@@ -35,6 +36,7 @@ const getCandidateProfilePage = async (req, res) => {
         work_experience,
         education,
         user: user.rows[0],
+        skills,
       });
     } catch (error) {}
   }
@@ -119,9 +121,61 @@ const addCandidateEducation = async (req, res) => {
   } catch (error) {}
 };
 
+const addCandidateSkill = async (req, res) => {
+  const { skillName } = req.body;
+
+  try {
+    if (!skillName) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ msg: "You need to proovide all fields" });
+    }
+
+    const dbRes = await client.query(insertNewSkill, [
+      req.session.userId,
+      skillName,
+    ]);
+
+    if (dbRes.rowCount === 1) {
+      return res.status(StatusCodes.OK).json({ msg: "New skill added." });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getRecommendedJobs = async (req, res) => {
+  console.log(req.session.userId);
+
+  const selectUserSkills = "SELECT skill_name FROM skills WHERE user_id = $1";
+  const selectUserJobs =
+    "SELECT * FROM job_postings WHERE title ILIKE $1 OR description ILIKE $1";
+
+  try {
+    const skills = await client.query(selectUserSkills, [req.session.userId]);
+
+    const recommendedJobs = await Promise.all(
+      skills.rows.map(async (skill) => {
+        const result = await client.query(selectUserJobs, [
+          `%${skill.skill_name}%`,
+        ]);
+        return result.rows;
+      })
+    );
+
+    res.render("components/candidate-profile/recommended-jobs", {
+      jobs: recommendedJobs.flat(),
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 module.exports = {
   getCandidateProfilePage,
   postCandidateSummary,
   addCandidateRole,
   addCandidateEducation,
+  addCandidateSkill,
+  getRecommendedJobs,
 };
