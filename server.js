@@ -52,7 +52,21 @@ app.get("/", (req, res) => {
 });
 
 app.get("/jobs", (req, res) => {
+  console.log(req.query);
   res.render("pages/jobs/all-jobs-result");
+});
+
+app.post("/search", async (req, res) => {
+  const { what, where } = req.body;
+
+  let sql =
+    "SELECT * FROM job_postings WHERE title ILIKE $1 OR location ILIKE $2 OR description ILIKE $1";
+
+  const result = await client.query(sql, ["%" + what + "%", "%" + where + "%"]);
+  if (result.rowCount !== 0) {
+    return res.render("pages/jobs/all-jobs-result", { result });
+  }
+  return res.status(404).send("<h1>Not found</h1>");
 });
 
 app.get("/jobs/:id", async (req, res) => {
@@ -70,6 +84,12 @@ app.get("/jobs/:id", async (req, res) => {
 
 app.get("/employers", (req, res) => {
   res.render("pages/employers/index");
+});
+
+app.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    res.redirect("/");
+  });
 });
 
 async function init() {

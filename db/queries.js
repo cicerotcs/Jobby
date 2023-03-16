@@ -5,6 +5,7 @@ const employerSignupQuery =
   "insert into employers(company_name, email, password, user_type) values($1,$2,$3,$4);";
 
 const selectUser = "select * from users where email=$1;";
+const selectUserNameAndEmail = "select name, email from users where id=$1";
 const selectEmployer = "select * from employers where email=$1;";
 
 const selectUserSummary = "select * from user_about where user_id=$1";
@@ -57,4 +58,5 @@ module.exports = {
   selectJob,
   editJobQuery,
   deleteJobQuery,
+  selectUserNameAndEmail,
 };

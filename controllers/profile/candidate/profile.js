@@ -8,11 +8,16 @@ const {
   updateSummary,
   addRole,
   addEducation,
+  selectUserNameAndEmail,
 } = require("../../../db/queries");
 
 const getCandidateProfilePage = async (req, res) => {
   if (req.session.authorized && req.session.userId) {
     try {
+      const user = await client.query(selectUserNameAndEmail, [
+        req.session.userId,
+      ]);
+
       const summary = await client.query(selectUserSummary, [
         req.session.userId,
       ]);
@@ -29,6 +34,7 @@ const getCandidateProfilePage = async (req, res) => {
         summary: summary.rows[0],
         work_experience,
         education,
+        user: user.rows[0],
       });
     } catch (error) {}
   }

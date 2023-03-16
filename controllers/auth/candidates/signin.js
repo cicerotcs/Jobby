@@ -28,7 +28,7 @@ const postCandidateSignin = async (req, res) => {
       if (match) {
         req.session.userId = id;
         req.session.authorized = true;
-        return res.status(StatusCodes.OK).redirect("/");
+        return res.status(StatusCodes.OK).redirect("/candidate/profile");
       } else {
         return res
           .status(StatusCodes.BAD_REQUEST)

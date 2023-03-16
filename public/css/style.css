@@ -520,7 +520,7 @@ a {
   font-weight: 400;
 }
 
-.employer-page button {
+.employer-page a {
   padding: 20px 30px;
   background-color: var(--primary-color);
   color: var(--white-color);

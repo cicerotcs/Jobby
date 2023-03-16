@@ -28,7 +28,7 @@ const postEmployerSignin = async (req, res) => {
       if (match) {
         req.session.employerId = id;
         req.session.authorized = true;
-        return res.status(StatusCodes.OK).redirect("/");
+        return res.status(StatusCodes.OK).redirect("/employer/profile");
       } else {
         return res
           .status(StatusCodes.BAD_REQUEST)

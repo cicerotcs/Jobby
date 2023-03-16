@@ -4,7 +4,7 @@
   </div>
   <div class="navbar-links">
     <a href="#" class="active-link">Job search</a>
-    <a href="#">Profile</a>
+    <a href="/candidate/profile">Profile</a>
     <a href="#">Company reviews</a>
   </div>
   <div class="navbar-auth-links">
@@ -13,7 +13,7 @@
       ><%= employer.company_name.split(" ")[0].toUpperCase() %></span
     >
     <span class="bar"></span>
-    <a href="/candidate/signin">Candidate signin</a>
+    <a href="/employer/profile">Employer profile</a>
     <% } else if (candidate && candidate.name) { %>
     <span style="margin-right: 20px"
       ><%= candidate.name.split(" ")[0].toUpperCase() %></span
@@ -21,7 +21,7 @@
     <span class="bar"></span>
     <a href="/employers">Employer site</a>
     <% } else { %>
-    <a class="signin" href="#">Sign in</a>
+    <a class="signin" href="/candidate/signin">Sign in</a>
     <span class="bar"></span>
     <a href="/employers">Employer site</a>
     <% } %>

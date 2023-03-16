@@ -1,85 +1,27 @@
 <section class="all-jobs">
+  <% if(result && result.rows.length > 0){ %> <% result.rows.forEach((item) => {
+  %>
   <div class="box">
-    <h2 class="job-title"><a href="#">Software Engineer</a></h2>
+    <h2 class="job-title"><a href="/jobs/<%=item.id%>"><%=item.title %></a></h2>
     <div class="company-name">
-      <span>Commonwealth Bank</span>
+      <span><%=item.company %></span>
     </div>
     <div class="company-location">
-      <span>Adelaide Region SA</span>
+      <span><%=item.location %></span>
     </div>
     <div class="job-type">
       <span><img src="/assets/suitcase.png" alt="" /> Full Time</span>
     </div>
     <div class="job-description">
       <ul>
-        <li>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero,
-          corrupti?
-        </li>
-        <li>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis,
-          aut!
-        </li>
+        <li><%=item.description %></li>
       </ul>
     </div>
     <div class="posted-date">
       <small>Posted 19 days ago</small>
     </div>
   </div>
-
-  <div class="box">
-    <h2 class="job-title"><a href="#">Software Engineer</a></h2>
-    <div class="company-name">
-      <span>Commonwealth Bank</span>
-    </div>
-    <div class="company-location">
-      <span>Adelaide Region SA</span>
-    </div>
-    <div class="job-type">
-      <span><img src="/assets/suitcase.png" alt="" /> Full Time</span>
-    </div>
-    <div class="job-description">
-      <ul>
-        <li>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero,
-          corrupti?
-        </li>
-        <li>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis,
-          aut!
-        </li>
-      </ul>
-    </div>
-    <div class="posted-date">
-      <small>Posted 19 days ago</small>
-    </div>
-  </div>
-
-  <div class="box">
-    <h2 class="job-title"><a href="#">Software Engineer</a></h2>
-    <div class="company-name">
-      <span>Commonwealth Bank</span>
-    </div>
-    <div class="company-location">
-      <span>Adelaide Region SA</span>
-    </div>
-    <div class="job-type">
-      <span><img src="/assets/suitcase.png" alt="" /> Full Time</span>
-    </div>
-    <div class="job-description">
-      <ul>
-        <li>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero,
-          corrupti?
-        </li>
-        <li>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis,
-          aut!
-        </li>
-      </ul>
-    </div>
-    <div class="posted-date">
-      <small>Posted 19 days ago</small>
-    </div>
-  </div>
+  <% }); %> <% } else { %>
+  <p>No jobs found.</p>
+  <% } %>
 </section>
