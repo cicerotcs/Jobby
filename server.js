@@ -3,6 +3,7 @@ const expressLayouts = require("express-ejs-layouts");
 const client = require("./db/connect");
 require("dotenv").config();
 const session = require("express-session");
+const MemoryStore = require("memorystore")(session);
 const candidateAuthRouter = require("./routes/auth/candidates/auth");
 const employerAuthRouter = require("./routes/auth/employers/auth");
 
