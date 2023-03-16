@@ -1,1 +1,62 @@
-<div>employer dashboard</div>
+<div class="employer-dashboard">
+  <div class="employer-links">
+    <p>My posted jobs:</p>
+    <% jobs.map(job => { %>
+    <div class="employer-jobs">
+      <a href="/jobs/<%=job.id%>"><%= job.title.toUpperCase() %></a>
+    </div>
+
+    <% }) %>
+  </div>
+
+  <div class="job-form">
+    <h1>Add a new job</h1>
+    <form name="postJob">
+      <label for="jobTitle">Title</label>
+      <input type="text" name="jobTitle" id="jobTitle" />
+      <label for="jobDescription">Description</label>
+      <textarea
+        name="jobDescription"
+        id="jobDescription"
+        cols="30"
+        rows="10"
+      ></textarea>
+      <label for="jobCompany">Company</label>
+      <input type="text" name="jobCompany" id="jobCompany" />
+      <label for="jobLocation">Location</label>
+      <input type="text" name="jobLocation" id="jobLocation" />
+      <label for="jobSalary">Salary range</label>
+      <input type="text" name="jobSalary" id="jobSalary" />
+      <button type="submit">Post job</button>
+    </form>
+    <p class="message"></p>
+  </div>
+</div>
+
+<script>
+  const form = document.forms.postJob;
+  const message = document.querySelector(".message");
+  const { jobTitle, jobDescription, jobCompany, jobLocation, jobSalary } =
+    form.elements;
+
+  const handlePostJob = async (event) => {
+    event.preventDefault();
+    try {
+      const res = await axios.post("/employer/profile/job/new", {
+        jobTitle: jobTitle.value,
+        jobDescription: jobDescription.value,
+        jobCompany: jobCompany.value,
+        jobLocation: jobLocation.value,
+        jobSalary: jobSalary.value,
+      });
+      if (res.status === 200) {
+        message.textContent = res.data.msg;
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
+      }
+    } catch (error) {}
+  };
+
+  form.addEventListener("submit", handlePostJob);
+</script>

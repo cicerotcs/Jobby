@@ -11,6 +11,8 @@ const employerProfileRouter = require("./routes/profile/employers/profile");
 
 const getInfoMiddleware = require("./middleware/getUserInfo");
 
+const { selectJob } = require("./db/queries");
+
 const app = express();
 
 app.set("view engine", "ejs");
@@ -53,8 +55,17 @@ app.get("/jobs", (req, res) => {
   res.render("pages/jobs/all-jobs-result");
 });
 
-app.get("/jobs/:id", (req, res) => {
-  res.render("pages/jobs/job-details");
+app.get("/jobs/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const dbRes = await client.query(selectJob, [id]);
+    const job = dbRes.rows[0];
+    let sessionId = null;
+    if (req.session.employerId) {
+      sessionId = req.session.employerId;
+    }
+    res.render("pages/jobs/job-details", { job, sessionId, id });
+  } catch (error) {}
 });
 
 app.get("/employers", (req, res) => {

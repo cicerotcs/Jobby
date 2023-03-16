@@ -1,13 +1,27 @@
+<span id="getId" data-id="<%=id%>"></span>
+
 <div class="searchbar-component">
   <%- include('../../components/searchbar'); %>
 </div>
+
+<div class="editFormJob hidden">
+  <%-include('../../forms/jobForm', {job, id}); %>
+</div>
+
 <section class="job-details">
-  <h1 class="job-details-title">Software Engineer</h1>
+  <div class="component">
+    <% if(sessionId && sessionId === job.employer_id){ %>
+    <button class="editJob">Edit</button>
+    <button class="deleteJob">Delete</button>
+    <% } %>
+  </div>
+
+  <h1 class="job-details-title"><%= job.title %></h1>
   <div class="job-details-company">
-    <span>Commonwealth Bank</span>
+    <span><% job.company %></span>
   </div>
   <div class="job-details-location">
-    <span>Adelaide Region SA</span>
+    <span><%= job.location %></span>
   </div>
   <div class="job-details-type">
     <span>Full Time</span>
@@ -32,11 +46,11 @@
   <div class="horizontal-bar"></div>
 
   <div class="job-details-full-description">
-    <span class="job-details-header">Full Job Description</span>
+    <span class="job-details-header"><%= job.description %></span>
   </div>
 
   <div class="job-details-about-company">
-    <span class="job-details-header">About SwarmFarm Robotics</span>
+    <span class="job-details-header">About <%= job.company %></span>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, fugit?
       Quam repudiandae perspiciatis consequuntur ea consequatur labore itaque
@@ -83,3 +97,45 @@
     </p>
   </div>
 </section>
+
+<script>
+  const editButton = document.querySelector(".editJob");
+  const formJob = document.querySelector(".editFormJob");
+  const blockJobDetails = document.querySelector(".job-details");
+  const deleteButton = document.querySelector(".deleteJob");
+
+  const spanId = document.getElementById("getId");
+
+  const cancelPostJob = document.querySelector(".cancel-post-job");
+
+  const handleClick = () => {
+    formJob.classList.remove("hidden");
+    blockJobDetails.classList.add("hidden");
+  };
+
+  const handleCancel = (event) => {
+    event.preventDefault();
+    formJob.classList.add("hidden");
+    blockJobDetails.classList.remove("hidden");
+  };
+
+  const handleDelete = async () => {
+    try {
+      const res = await axios.delete(
+        `/employer/profile/job/${spanId.dataset.id}`
+      );
+      if (res.status === 200) {
+        location.replace("/employer/profile");
+      }
+    } catch (error) {}
+  };
+
+  if (editButton) {
+    editButton.addEventListener("click", handleClick);
+  }
+  if (deleteButton) {
+    deleteButton.addEventListener("click", handleDelete);
+  }
+
+  cancelPostJob.addEventListener("click", handleCancel);
+</script>

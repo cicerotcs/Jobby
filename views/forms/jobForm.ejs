@@ -1,0 +1,75 @@
+<div class="job-form">
+  <h1>Edit job</h1>
+  <% if(job){ %>
+  <form name="postJob">
+    <input type="hidden" name="jobId" value="<%=id %>" />
+    <label for="jobTitle">Title</label>
+    <input type="text" name="jobTitle" id="jobTitle" value="<%=job.title %>" />
+    <label for="jobDescription">Description</label>
+    <textarea name="jobDescription" id="jobDescription" cols="30" rows="10">
+<%=job.description %></textarea
+    >
+    <label for="jobCompany">Company</label>
+    <input
+      type="text"
+      name="jobCompany"
+      id="jobCompany"
+      value="<%=job.company %>"
+    />
+    <label for="jobLocation">Location</label>
+    <input
+      type="text"
+      name="jobLocation"
+      id="jobLocation"
+      value="<%=job.location %>"
+    />
+    <label for="jobSalary">Salary range</label>
+    <input
+      type="text"
+      name="jobSalary"
+      id="jobSalary"
+      value="<%=job.salary_range %>"
+    />
+    <button type="submit">Edit job</button>
+    <button class="cancel-post-job">Cancel</button>
+  </form>
+  <% } %>
+
+  <p class="message"></p>
+</div>
+
+<script>
+  const form = document.forms.postJob;
+  const message = document.querySelector(".message");
+  const {
+    jobTitle,
+    jobDescription,
+    jobCompany,
+    jobLocation,
+    jobSalary,
+    jobId,
+  } = form.elements;
+
+  const handlePostJob = async (event) => {
+    event.preventDefault();
+    try {
+      const res = await axios.put("/employer/profile/job/edit", {
+        jobTitle: jobTitle.value,
+        jobDescription: jobDescription.value,
+        jobCompany: jobCompany.value,
+        jobLocation: jobLocation.value,
+        jobSalary: jobSalary.value,
+        jobId: jobId.value,
+      });
+
+      if (res.status === 200) {
+        message.textContent = res.data.msg;
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
+      }
+    } catch (error) {}
+  };
+
+  form.addEventListener("submit", handlePostJob);
+</script>

@@ -26,6 +26,19 @@ const addRole =
 const addEducation =
   "INSERT INTO education (user_id, institution_name, degree, field_of_study, start_date, end_date) VALUES ($1, $2, $3,$4, to_date($5, 'Mon YYYY'), to_date($6, 'Mon YYYY'));";
 
+const addJob =
+  "insert into job_postings(title,description,company,location,salary_range,employer_id) values($1,$2,$3,$4,$5,$6);";
+
+const getAllJobsByEmployerId =
+  "select * from job_postings where employer_id=$1;";
+
+const selectJob = "select * from job_postings where id=$1";
+
+const editJobQuery =
+  "update job_postings set title=$1, description=$2, company=$3, location=$4, salary_range=$5 where id=$6;";
+
+const deleteJobQuery = "delete from job_postings where id=$1;";
+
 module.exports = {
   candidateSignupQuery,
   selectUser,
@@ -39,4 +52,9 @@ module.exports = {
   addRole,
   addEducation,
   selectUserWorkExperiencesById,
+  addJob,
+  getAllJobsByEmployerId,
+  selectJob,
+  editJobQuery,
+  deleteJobQuery,
 };

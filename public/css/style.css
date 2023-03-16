@@ -474,6 +474,22 @@ a {
   margin-top: 10px;
 }
 
+.job-details .editJob,
+.deleteJob {
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 0;
+  outline: none;
+  margin: 30px 0;
+  cursor: pointer;
+}
+
+.job-details .editJob {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  margin-right: 10px;
+}
+
 /* employers page */
 
 .employer-page {
@@ -677,7 +693,8 @@ a {
 .role-form,
 .education-form,
 .skills-form,
-.summary-form {
+.summary-form,
+.job-form {
   background-color: var(--footer-color);
   padding: 20px;
   border-left: 2px solid var(--primary-color);
@@ -690,14 +707,16 @@ a {
 .role-form form,
 .education-form form,
 .skills-form form,
-.summary-form form {
+.summary-form form,
+.job-form form {
   margin-top: 20px;
 }
 
 .role-form label,
 .education-form label,
 .skills-form label,
-.summary-form label {
+.summary-form label,
+.job-form label {
   display: block;
   font-weight: 600;
   margin-top: 15px;
@@ -706,7 +725,9 @@ a {
 .role-form input,
 .education-form input,
 .skills-form input,
-.summary-form textarea {
+.summary-form textarea,
+.job-form input,
+.job-form textarea {
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
@@ -747,8 +768,43 @@ a {
 .role-form .save-form-role,
 .education-form .save-form-education,
 .skills-form .save-form-skill,
-.summary-form .save-form-summary {
+.summary-form .save-form-summary,
+.job-form button {
   background-color: var(--primary-color);
   color: var(--white-color);
   margin-right: 10px;
+}
+
+/* employer dashboard */
+
+.employer-dashboard {
+  display: flex;
+}
+
+.employer-dashboard .employer-jobs {
+  margin-top: 10px;
+}
+
+.job-form {
+  max-width: 800px;
+  margin: 50px auto;
+  flex: 1;
+}
+
+.job-form button {
+  padding: 15px 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+
+.employer-links {
+  flex: 2;
+  margin-top: 50px;
+}
+
+.employer-links a:hover {
+  text-decoration: underline;
 }
