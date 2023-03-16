@@ -6,6 +6,11 @@ const session = require("express-session");
 const candidateAuthRouter = require("./routes/auth/candidates/auth");
 const employerAuthRouter = require("./routes/auth/employers/auth");
 
+const candidateProfileRouter = require("./routes/profile/candidates/profile");
+const employerProfileRouter = require("./routes/profile/employers/profile");
+
+const getInfoMiddleware = require("./middleware/getUserInfo");
+
 const app = express();
 
 app.set("view engine", "ejs");
@@ -32,8 +37,13 @@ app.use(session(sess));
 
 const port = process.env.PORT || 5000;
 
+app.use(getInfoMiddleware);
+
 app.use("/candidate", candidateAuthRouter);
 app.use("/employer", employerAuthRouter);
+
+app.use("/candidate", candidateProfileRouter);
+app.use("/employer", employerProfileRouter);
 
 app.get("/", (req, res) => {
   res.render("index");

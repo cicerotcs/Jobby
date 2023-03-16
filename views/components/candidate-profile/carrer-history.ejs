@@ -1,0 +1,48 @@
+<div class="form-role hidden"><%- include('../../forms/role'); %></div>
+<div class="career-history">
+  <h2>Career History</h2>
+
+  <% if (work_experience) { %> <% work_experience.rows.forEach((experience,
+  index) => { %>
+  <div class="career-details">
+    <a
+      href="/candidate/profile/role/<%=experience.id%>/edit"
+      style="text-align: right; display: block"
+      >Edit</a
+    >
+    <p class="position"><%= experience.position %></p>
+    <p class="company-name"><%= experience.company_name %></p>
+    <div>
+      <span class="start-date"><%= experience.start_date_string %></span> -
+      <span class="end-date"><%= experience.end_date_string %></span>
+    </div>
+    <% if (index < work_experience.rows.length - 1) { %>
+    <div class="horizontal-bar"></div>
+    <% } %>
+  </div>
+  <% }) %> <% } %>
+
+  <button class="add-role">Add role</button>
+</div>
+
+<script>
+  const formCareer = document.querySelector(".form-role");
+  const blockCareer = document.querySelector(".career-history");
+  const addRole = document.querySelector(".add-role");
+  const closeRoleForm = document.querySelector(".cancel-form-role");
+
+  const openFormRole = function (event) {
+    event.preventDefault();
+    formCareer.classList.remove("hidden");
+    blockCareer.classList.add("hidden");
+  };
+
+  const closeFormRole = function (event) {
+    event.preventDefault();
+    formCareer.classList.add("hidden");
+    blockCareer.classList.remove("hidden");
+  };
+
+  addRole.addEventListener("click", openFormRole);
+  closeRoleForm.addEventListener("click", closeFormRole);
+</script>

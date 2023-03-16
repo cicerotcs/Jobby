@@ -1,0 +1,8 @@
+<div class="candidate-dashboard">
+  <%- include('../../components/candidate-profile/panel'); %>
+  <%-include('../../components/candidate-profile/personal-summary', {summary});
+  %> <%-include('../../components/candidate-profile/carrer-history',
+  {work_experience}); %>
+  <%-include('../../components/candidate-profile/education', {education}); %>
+  <%-include('../../components/candidate-profile/skills'); %>
+</div>

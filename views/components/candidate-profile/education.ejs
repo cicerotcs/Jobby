@@ -1,0 +1,43 @@
+<div class="form-education hidden">
+  <%- include('../../forms/education'); %>
+</div>
+<div class="education">
+  <h2>Education</h2>
+  <% if(education){ %> <% education.rows.forEach((item, index) => { %>
+  <div class="education-details">
+    <p class="degreeAndField"><%=item.degree %> (<%=item.field_of_study %>)</p>
+    <p class="institution-name"><%=item.institution_name%></p>
+    <div>
+      <span class="start-date"><%=item.start_date_string %></span> -
+      <span class="end-date"><%=item.end_date_string %></span>
+    </div>
+    <% if (index < education.rows.length - 1) { %>
+    <div class="horizontal-bar"></div>
+    <% } %>
+  </div>
+  <% }) %> <% } %>
+
+  <button class="add-education">Add education</button>
+</div>
+
+<script>
+  const formEducation = document.querySelector(".form-education");
+  const blockEducation = document.querySelector(".education");
+  const addEducation = document.querySelector(".add-education");
+  const closeEducationForm = document.querySelector(".cancel-form-education");
+
+  const openFormEducation = function (event) {
+    event.preventDefault();
+    formEducation.classList.remove("hidden");
+    blockEducation.classList.add("hidden");
+  };
+
+  const closeFormEducation = function (event) {
+    event.preventDefault();
+    formEducation.classList.add("hidden");
+    blockEducation.classList.remove("hidden");
+  };
+
+  addEducation.addEventListener("click", openFormEducation);
+  closeEducationForm.addEventListener("click", closeFormEducation);
+</script>

@@ -1,0 +1,103 @@
+<div class="role-form">
+  <h2>Add role</h2>
+  <form name="role">
+    <label for="job-title">Job title</label>
+    <input type="text" name="jobTitle" id="job-title" />
+    <label for="company-name">Company name</label>
+    <input type="text" name="companyName" id="company-name" />
+    <div class="started">
+      <label>Started</label>
+      <select name="startedMonth" id="startedMonth">
+        <option value="">Month</option>
+        <option value="Jan">Jan</option>
+        <option value="Feb">Feb</option>
+        <option value="Mar">Mar</option>
+        <option value="Apr">Apr</option>
+        <option value="Jul">Jul</option>
+        <option value="Sep">Sep</option>
+        <option value="Oct">Oct</option>
+        <option value="Nov">Nov</option>
+        <option value="Dec">Dec</option>
+      </select>
+      <select name="startedYear" id="startedYear">
+        <option value="">Year</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        <option value="2020">2020</option>
+        <option value="2019">2019</option>
+        <option value="2018">2018</option>
+        <option value="2017">2017</option>
+        <option value="2016">2016</option>
+        <option value="2015">2015</option>
+      </select>
+    </div>
+    <div class="ended">
+      <label>Ended</label>
+      <select name="endedMonth" id="endedMonth">
+        <option value="">Month</option>
+        <option value="Jan">Jan</option>
+        <option value="Feb">Feb</option>
+        <option value="Mar">Mar</option>
+        <option value="Apr">Apr</option>
+        <option value="Jul">Jul</option>
+        <option value="Sep">Sep</option>
+        <option value="Oct">Oct</option>
+        <option value="Nov">Nov</option>
+        <option value="Dec">Dec</option>
+      </select>
+      <select name="endedYear" id="endedYear">
+        <option value="">Year</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        <option value="2020">2020</option>
+        <option value="2019">2019</option>
+        <option value="2018">2018</option>
+        <option value="2017">2017</option>
+        <option value="2016">2016</option>
+        <option value="2015">2015</option>
+      </select>
+    </div>
+    <div class="role-form-buttons">
+      <button type="submit" class="save-form-role">Save</button>
+      <button class="cancel-form-role">Cancel</button>
+    </div>
+    <p class="message"></p>
+  </form>
+</div>
+
+<script>
+  const formRole = document.forms.role;
+  const startedMonth = document.querySelector("#startedMonth");
+  const endedMonth = document.querySelector("#endedMonth");
+  const startedYear = document.querySelector("#startedYear");
+  const endedYear = document.querySelector("#endedYear");
+
+  const { jobTitle, companyName } = formRole.elements;
+
+  const handleAddRole = async (event) => {
+    event.preventDefault();
+    const jobTitleValue = jobTitle.value;
+    const companyNameValue = companyName.value;
+
+    const startedMonthAndYear = `${startedMonth.value} ${startedYear.value}`;
+    const endedMonthAndYear = `${endedMonth.value} ${endedYear.value}`;
+
+    try {
+      const res = await axios.post("/candidate/profile/role/new", {
+        jobTitle: jobTitleValue,
+        companyName: companyNameValue,
+        startedMonthAndYear,
+        endedMonthAndYear,
+      });
+      if (res.status === 200) {
+        setTimeout(() => {
+          location.reload();
+        }, 1000);
+      }
+    } catch (error) {}
+  };
+
+  formRole.addEventListener("submit", handleAddRole);
+</script>

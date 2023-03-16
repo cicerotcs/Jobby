@@ -5,7 +5,10 @@ const { StatusCodes } = require("http-status-codes");
 const { selectEmployer } = require("../../../db/queries");
 
 const getEmployerSigninPage = async (req, res) => {
-  res.status(StatusCodes.OK).render("pages/auth/signin/employers/signin");
+  if (req.session.authorized && req.session.employerId) {
+    return res.redirect("/employer/profile");
+  }
+  return res.render("pages/auth/signin/employers/signin");
 };
 
 const postEmployerSignin = async (req, res) => {

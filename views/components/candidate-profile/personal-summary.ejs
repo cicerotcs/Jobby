@@ -1,0 +1,36 @@
+<div class="form-summary hidden">
+  <%- include('../../forms/personal-summary', {summary}); %>
+</div>
+<div class="personal-summary">
+  <h2>Personal summary</h2>
+
+  <% if(summary && summary.about.length !== 0){ %>
+  <p><%=summary.about %></p>
+  <button class="open-summary">edit summary</button>
+  <% }else{ %>
+  <p></p>
+  <button class="open-summary">Add summary</button>
+  <% } %>
+</div>
+
+<script>
+  const formSummary = document.querySelector(".form-summary");
+  const blockSummary = document.querySelector(".personal-summary");
+  const openSummary = document.querySelector(".open-summary");
+  const closeSummary = document.querySelector(".cancel-form-summary");
+
+  const openFormSummary = function (event) {
+    event.preventDefault();
+    formSummary.classList.remove("hidden");
+    blockSummary.classList.add("hidden");
+  };
+
+  const closeFormSummary = function (event) {
+    event.preventDefault();
+    formSummary.classList.add("hidden");
+    blockSummary.classList.remove("hidden");
+  };
+
+  openSummary.addEventListener("click", openFormSummary);
+  closeSummary.addEventListener("click", closeFormSummary);
+</script>

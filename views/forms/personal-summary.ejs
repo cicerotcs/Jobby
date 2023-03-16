@@ -1,0 +1,41 @@
+<div class="summary-form">
+  <h2>Add Summary</h2>
+  <form name="summary">
+    <label for="summary">Summary</label>
+    <% if(summary && summary.about.length !== 0){ %>
+    <textarea type="text" name="summaryText" id="summary-text">
+<%=summary.about %></textarea
+    >
+    <% }else{ %>
+    <textarea type="text" name="summaryText" id="summary-text"></textarea>
+    <% } %>
+    <div class="summary-form-buttons">
+      <button type="submit" class="save-form-summary">Save</button>
+      <button class="cancel-form-summary">Cancel</button>
+    </div>
+    <p class="message"></p>
+  </form>
+</div>
+
+<script>
+  const form = document.forms.summary;
+  const message = document.querySelector(".message");
+  const { summaryText } = form.elements;
+
+  const handleSummary = async (event) => {
+    event.preventDefault();
+    try {
+      const res = await axios.put("/candidate/profile/summary", {
+        summaryText: summaryText.value,
+      });
+      if (res.status === 200) {
+        message.textContent = res.data.msg;
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
+      }
+    } catch (error) {}
+  };
+
+  form.addEventListener("submit", handleSummary);
+</script>

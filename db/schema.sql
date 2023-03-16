@@ -25,6 +25,8 @@ CREATE TABLE work_experiences(
     end_date DATE
 );
 
+INSERT INTO work_experiences (user_id, company_name, position, start_date, end_date) VALUES(1, 'Microsoft', 'Software Engineer','2020-03-15', '2021-12-03');
+INSERT INTO work_experiences (user_id, company_name, position, start_date, end_date) VALUES(1, 'Google', 'Software Engineer','2020-03-15', '2021-12-03');
 
 CREATE TABLE education (
   id SERIAL PRIMARY KEY,
@@ -37,14 +39,15 @@ CREATE TABLE education (
   gpa NUMERIC(3,2)
 );
 
+INSERT INTO education (user_id, institution_name, degree, field_of_study, start_date, end_date) VALUES(1, 'Federation University', 'Master Degree','Software engineering', '2020-15-03', '2021-12-03')
+
 CREATE TABLE skills (
   id SERIAL PRIMARY KEY,
   user_id INTEGER NOT NULL REFERENCES users(id),
   skill_name VARCHAR(255) NOT NULL,
-  skill_level INTEGER NOT NULL,
-  experience_years INTEGER,
-  certification VARCHAR(255)
 );
+
+INSERT INTO skills(user_id, skill_name) values(1, 'Javascript');
 
 CREATE TABLE user_about(
     id SERIAL PRIMARY KEY,
@@ -54,3 +57,7 @@ CREATE TABLE user_about(
     github_url VARCHAR(255),
     portfolio_url VARCHAR(255)
 );
+
+INSERT INTO user_about(user_id, about) values(1, 'Experienced Front-End Engineer');
+
+

@@ -1,0 +1,33 @@
+<div class="form-skills hidden"><%- include('../../forms/skills'); %></div>
+<div class="skills">
+  <h2>Skills</h2>
+  <div class="skills-details">
+    <span class="skill-name">Javascript</span>
+    <span class="skill-name">Javascript</span>
+    <span class="skill-name">Javascript</span>
+    <span class="skill-name">Javascript</span>
+  </div>
+  <button class="add-skill">Add skills</button>
+</div>
+
+<script>
+  const formSkills = document.querySelector(".form-skills");
+  const blockSkills = document.querySelector(".skills");
+  const addSkill = document.querySelector(".add-skill");
+  const closeSkillForm = document.querySelector(".cancel-form-skill");
+
+  const openFormSkill = function (event) {
+    event.preventDefault();
+    formSkills.classList.remove("hidden");
+    blockSkills.classList.add("hidden");
+  };
+
+  const closeFormSkills = function (event) {
+    event.preventDefault();
+    formSkills.classList.add("hidden");
+    blockSkills.classList.remove("hidden");
+  };
+
+  addSkill.addEventListener("click", openFormSkill);
+  closeSkillForm.addEventListener("click", closeFormSkills);
+</script>

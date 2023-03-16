@@ -8,9 +8,23 @@
     <a href="#">Company reviews</a>
   </div>
   <div class="navbar-auth-links">
+    <% if (employer && employer.company_name) { %>
+    <span style="margin-right: 20px"
+      ><%= employer.company_name.split(" ")[0].toUpperCase() %></span
+    >
+    <span class="bar"></span>
+    <a href="/candidate/signin">Candidate signin</a>
+    <% } else if (candidate && candidate.name) { %>
+    <span style="margin-right: 20px"
+      ><%= candidate.name.split(" ")[0].toUpperCase() %></span
+    >
+    <span class="bar"></span>
+    <a href="/employers">Employer site</a>
+    <% } else { %>
     <a class="signin" href="#">Sign in</a>
     <span class="bar"></span>
-    <a href="#">Employer site</a>
+    <a href="/employers">Employer site</a>
+    <% } %>
   </div>
 </nav>
 

@@ -1,0 +1,105 @@
+<div class="education-form">
+  <h2>Add Education</h2>
+  <form name="education">
+    <label for="institution">Institution</label>
+    <input type="text" name="institution" id="institution" />
+    <label for="course">Course or qualification</label>
+    <input type="text" name="course" id="course" />
+    <label for="course-field">Field of study</label>
+    <input type="text" name="courseField" id="courseField" />
+    <div class="started">
+      <label>Started</label>
+      <select name="startedMonthEducation" id="startedMonthEducation">
+        <option value="">Month</option>
+        <option value="Jan">Jan</option>
+        <option value="Feb">Feb</option>
+        <option value="Mar">Mar</option>
+        <option value="Apr">Apr</option>
+        <option value="Jul">Jul</option>
+        <option value="Sep">Sep</option>
+        <option value="Oct">Oct</option>
+        <option value="Nov">Nov</option>
+        <option value="Dec">Dec</option>
+      </select>
+      <select name="startedYearEducation" id="startedYearEducation">
+        <option value="">Year</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        <option value="2020">2020</option>
+        <option value="2019">2019</option>
+        <option value="2018">2018</option>
+        <option value="2017">2017</option>
+        <option value="2016">2016</option>
+        <option value="2015">2015</option>
+      </select>
+    </div>
+    <div class="ended">
+      <label>Ended</label>
+      <select name="endedMonthEducation" id="endedMonthEducation">
+        <option value="">Month</option>
+        <option value="Jan">Jan</option>
+        <option value="Feb">Feb</option>
+        <option value="Mar">Mar</option>
+        <option value="Apr">Apr</option>
+        <option value="Jul">Jul</option>
+        <option value="Sep">Sep</option>
+        <option value="Oct">Oct</option>
+        <option value="Nov">Nov</option>
+        <option value="Dec">Dec</option>
+      </select>
+      <select name="endedYearEducation" id="endedYearEducation">
+        <option value="">Year</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        <option value="2020">2020</option>
+        <option value="2019">2019</option>
+        <option value="2018">2018</option>
+        <option value="2017">2017</option>
+        <option value="2016">2016</option>
+        <option value="2015">2015</option>
+      </select>
+    </div>
+    <div class="education-form-buttons">
+      <button type="submit" class="save-form-education">Save</button>
+      <button class="cancel-form-education">Cancel</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  const educationForm = document.forms.education;
+  const startedMonthEducation = document.querySelector(
+    "#startedMonthEducation"
+  );
+  const endedMonthEducation = document.querySelector("#endedMonthEducation");
+  const startedYearEducation = document.querySelector("#startedYearEducation");
+  const endedYearEducation = document.querySelector("#endedYearEducation");
+
+  const { institution, course, courseField } = educationForm.elements;
+
+  const handleAddEducation = async (event) => {
+    event.preventDefault();
+
+    const startedMonthAndYear = `${startedMonthEducation.value} ${startedYearEducation.value}`;
+    const endedMonthAndYear = `${endedMonthEducation.value} ${endedYearEducation.value}`;
+
+    try {
+      const res = await axios.post("/candidate/profile/education/new", {
+        institution: institution.value,
+        course: course.value,
+        courseField: courseField.value,
+        startedMonthAndYear,
+        endedMonthAndYear,
+      });
+      if (res.status === 200) {
+        setTimeout(() => {
+          location.reload();
+        }, 1000);
+      }
+    } catch (error) {}
+  };
+
+  educationForm.addEventListener("submit", handleAddEducation);
+</script>

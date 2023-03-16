@@ -5,7 +5,10 @@ const { StatusCodes } = require("http-status-codes");
 const { selectUser } = require("../../../db/queries");
 
 const getCandidateSigninPage = async (req, res) => {
-  res.status(StatusCodes.OK).render("pages/auth/signin/candidates/signin");
+  if (req.session.authorized && req.session.userId) {
+    return res.redirect("/candidate/profile");
+  }
+  return res.render("pages/auth/signin/candidates/signin");
 };
 
 const postCandidateSignin = async (req, res) => {
