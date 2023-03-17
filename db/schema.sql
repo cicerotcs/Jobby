@@ -5,7 +5,8 @@ CREATE TABLE users(
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(100) NOT NULL,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    user_type VARCHAR(50)
 );
 
 CREATE TABLE employers(
@@ -13,7 +14,8 @@ CREATE TABLE employers(
     company_name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(100) NOT NULL,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    user_type VARCHAR(50)
 );
 
 CREATE TABLE work_experiences(
@@ -44,7 +46,7 @@ INSERT INTO education (user_id, institution_name, degree, field_of_study, start_
 CREATE TABLE skills (
   id SERIAL PRIMARY KEY,
   user_id INTEGER NOT NULL REFERENCES users(id),
-  skill_name VARCHAR(255) NOT NULL,
+  skill_name VARCHAR(255) NOT NULL
 );
 
 INSERT INTO skills(user_id, skill_name) values(1, 'Javascript');
@@ -68,7 +70,8 @@ CREATE TABLE job_postings (
   location VARCHAR(255) NOT NULL,
   salary_range VARCHAR(255),
   date_posted TIMESTAMP DEFAULT NOW(),
-  is_active BOOLEAN DEFAULT true
+  is_active BOOLEAN DEFAULT true,
+  employer_id INTEGER
 );
 
 
